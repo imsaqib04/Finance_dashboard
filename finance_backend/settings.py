@@ -137,4 +137,13 @@ REST_FRAMEWORK = {
     
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
+
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',  # Bina login wale users ke liye
+        'rest_framework.throttling.UserRateThrottle'   # Logged-in users ke liye
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute',   # Bina token ke sirf 5 request 1 minute mein
+        'user': '30/minute'   # Token ke sath 30 request 1 minute mein
+    }
 }
