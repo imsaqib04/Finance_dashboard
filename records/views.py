@@ -11,6 +11,8 @@ class FinancialRecordViewSet(viewsets.ModelViewSet):
     filterset_fields = ['record_type', 'category', 'date']
     ordering_fields = ['date', 'amount']        # addition self
 
+    search_fields = ['category', 'notes']
+
     def get_queryset(self):
         # User API url mein bhej sakta hai: /api/records/?show_deleted=true
         show_deleted = self.request.query_params.get('show_deleted', 'false').lower() == 'true'

@@ -17,7 +17,7 @@ class FinancialRecord(models.Model):
     # add this extra self      , or user delete hone pr record delte nhi hoga 
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
-        on_delete=models.SET_NULL, 
+        on_delete=models.SET_NULL,  
         null=True, 
         blank=True
     )
