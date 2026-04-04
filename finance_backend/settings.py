@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'records',
     'dashboard',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
