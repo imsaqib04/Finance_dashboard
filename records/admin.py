@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import FinancialRecord
 
-# Register your models here.
+@admin.register(FinancialRecord)
+class FinancialRecordAdmin(admin.ModelAdmin):
+    list_display = ('id', 'record_type', 'amount', 'category', 'date', 'is_deleted')
+    list_filter = ('record_type', 'is_deleted', 'date')
+    search_fields = ('category', 'notes')
