@@ -5,5 +5,5 @@ from .serializers import RegisterSerializer
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (AllowAny,) # Koi bhi naya user account bana sakta hai
+    permission_classes = (AllowAny,)
     serializer_class = RegisterSerializer

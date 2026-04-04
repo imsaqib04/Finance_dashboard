@@ -4,7 +4,6 @@ from rest_framework.permissions import IsAuthenticated
 from .services import get_dashboard_summary
 
 class DashboardSummaryView(APIView):
-    # Assignment ke according Dashboard sab dekh sakte hain (Viewer, Analyst, Admin)
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
