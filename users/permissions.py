@@ -1,13 +1,18 @@
 from rest_framework.permissions import BasePermission
+from .models import User
 
 class IsAdminUserRole(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and request.user.role == 'ADMIN')
+        return bool(request.user and request.user.is_authenticated and request.user.role == User.Role.ADMIN)
 
 class IsAnalystOrAdmin(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and request.user.role in ['ANALYST', 'ADMIN'])
+        return bool(request.user and request.user.is_authenticated and request.user.role in [User.Role.ANALYST, User.Role.ADMIN])
 
 class IsViewerOrHigher(BasePermission):
     def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and request.user.role in ['VIEWER', 'ANALYST', 'ADMIN'])
+        return bool(
+            request.user and 
+            request.user.is_authenticated and 
+            request.user.role in [User.Role.VIEWER, User.Role.ANALYST, User.Role.ADMIN]
+        )

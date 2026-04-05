@@ -1,33 +1,37 @@
 from rest_framework import viewsets
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter
 from .models import FinancialRecord
 from .serializers import FinancialRecordSerializer
-from users.permissions import IsAdminUserRole, IsAnalystOrAdmin
+from users.permissions import IsAdminUserRole, IsAnalystOrAdmin,IsViewerOrHigher
+from rest_framework.filters import OrderingFilter, SearchFilter
+from .filters import FinancialRecordFilter
+from users.models import User
+
 
 class FinancialRecordViewSet(viewsets.ModelViewSet):
     serializer_class = FinancialRecordSerializer
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ['record_type', 'category', 'date']
-    ordering_fields = ['date', 'amount']        # addition self
-
+    filter_backends = [DjangoFilterBackend, OrderingFilter, SearchFilter]
+    filterset_class = FinancialRecordFilter
     search_fields = ['category', 'notes']
+    ordering_fields = ['date', 'amount']        # addition self
 
     def get_queryset(self):
         # User API url mein bhej sakta hai: /api/records/?show_deleted=true
         show_deleted = self.request.query_params.get('show_deleted', 'false').lower() == 'true'
         
         # Agar user Analyst/Admin hai AUR usne show_deleted=true bheja hai
-        if show_deleted and self.request.user.role in ['ANALYST', 'ADMIN']:
+        if show_deleted and self.request.user.role in [
+            User.Role.ANALYST, 
+            User.Role.ADMIN
+            ]:
             return FinancialRecord.objects.all() # Sab dikhao (Deleted bhi)
             
         # Default behavior: Sirf active records dikhao
         return FinancialRecord.objects.filter(is_deleted=False)
 
     def get_permissions(self):
-        # Access Control: Analyst aur Admin read kar sakte hain, create/update/delete sirf Admin
         if self.action in ['list', 'retrieve']:
-            permission_classes = [IsAnalystOrAdmin]
+            permission_classes = [IsViewerOrHigher]  # ye change karo
         else:
             permission_classes = [IsAdminUserRole]
         return [permission() for permission in permission_classes]
