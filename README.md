@@ -96,10 +96,3 @@ The easiest way to test the API is through the built-in Swagger interface.
 *(Note: To use secured endpoints in Swagger, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button at the top of the Swagger page. Format: `Bearer <your_token>`)*
 ```
 
-### Final Git Push:
-README file ko save karne ke baad apna aakhiri push kar dijiye:
-```bash
-git add README.md
-git commit -m "docs: added professional README for project setup and details"
-git push origin main
-```
