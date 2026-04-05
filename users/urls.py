@@ -8,9 +8,3 @@ urlpatterns = [
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/<int:pk>/update/', UserRoleUpdateView.as_view(), name='user-role-update'),
 ]
-
-
-#flow
-# Register karo  →  hamesha VIEWER banta hai
-# Admin login karo  →  kisi bhi user ka role change karo
-# Koi bhi khud se Admin nahi ban sakta ✅

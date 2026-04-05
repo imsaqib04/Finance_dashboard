@@ -31,7 +31,7 @@ class FinancialRecordViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
-            permission_classes = [IsViewerOrHigher]  # ye change karo
+            permission_classes = [IsAnalystOrAdmin]
         else:
             permission_classes = [IsAdminUserRole]
         return [permission() for permission in permission_classes]

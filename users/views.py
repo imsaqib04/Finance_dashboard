@@ -6,10 +6,10 @@ from .serializers import RegisterSerializer,UserUpdateSerializer
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
+    permission_classes = [AllowAny]
     serializer_class = RegisterSerializer
 
 class UserRoleUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
-    permission_classes = [IsAdminUserRole]  # sirf Admin access kar sakta hai
+    permission_classes = [IsAdminUserRole]

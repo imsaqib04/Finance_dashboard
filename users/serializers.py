@@ -32,7 +32,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         fields = ['role', 'is_active']
 
     def validate_role(self, value):
-        # Sirf valid roles allowed hain
         if value not in [User.Role.VIEWER, User.Role.ANALYST, User.Role.ADMIN]:
             raise serializers.ValidationError("Invalid role.")
         return value

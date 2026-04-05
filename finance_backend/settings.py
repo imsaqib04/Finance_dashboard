@@ -80,12 +80,18 @@ WSGI_APPLICATION = "finance_backend.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'finance_db',         
+        'USER': 'root',               
+        'PASSWORD': 'your mysql password',
+        'HOST': 'localhost',
+        'PORT': '3306',             
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -140,11 +146,13 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 
     'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',  # Bina login wale users ke liye
-        'rest_framework.throttling.UserRateThrottle'   # Logged-in users ke liye
+        'rest_framework.throttling.AnonRateThrottle',  
+        'rest_framework.throttling.UserRateThrottle'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '5/minute',   # Bina token ke sirf 5 request 1 minute mein
-        'user': '30/minute'   # Token ke sath 30 request 1 minute mein
+        'anon': '5/minute',   
+        'user': '30/minute'
     }
 }
+
+TIME_ZONE = 'Asia/Kolkata'

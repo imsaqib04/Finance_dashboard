@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from users.permissions import IsViewerOrHigher  # IsAuthenticated hatao
+from users.permissions import IsViewerOrHigher
 from .services import get_dashboard_summary
 
 class DashboardSummaryView(APIView):
-    permission_classes = [IsViewerOrHigher]  # role check hoga ab
+    permission_classes = [IsViewerOrHigher]
 
     def get(self, request):
         try:

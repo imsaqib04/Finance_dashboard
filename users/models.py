@@ -3,12 +3,11 @@ from django.db import models
 
 class User(AbstractUser):
     
-    class Role(models.TextChoices):  # Role, User ke andar hai
+    class Role(models.TextChoices): 
         VIEWER = 'VIEWER', 'Viewer'
         ANALYST = 'ANALYST', 'Analyst'
         ADMIN = 'ADMIN', 'Admin'
 
-    # Role class ke BAAD, lekin User class ke ANDAR
     role = models.CharField(
         max_length=10, 
         choices=Role.choices, 
