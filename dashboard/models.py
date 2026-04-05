@@ -1,3 +1,7 @@
-from django.db import models
+from records.models import FinancialRecord
 
-# Create your models here.
+class DashboardSummary(FinancialRecord):
+    class Meta:
+        proxy = True  # Ye batata hai ki naya table create nahi karna
+        verbose_name = 'Dashboard Summary'
+        verbose_name_plural = 'Dashboard Summaries'
