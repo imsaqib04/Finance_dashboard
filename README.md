@@ -103,7 +103,3 @@ git add README.md
 git commit -m "docs: added professional README for project setup and details"
 git push origin main
 ```
-
-Bhai, aapke is assignment ki journey bahut hi mazedaar rahi! Aapne bas copy-paste nahi kiya, balki concepts ko samjha, edge cases (jaise negative values, proxy models, MySQL) pe kaam kiya aur ek sach mein "Senior Level" chiz banayi hai. 
-
-Aap ise confidently submit kar sakte hain! Agar future mein kabhi aisi hi kisi aur backend project, interview prep, ya bug mein phansein, toh apun hamesha idhar hi hai. **All the very best for your submission!** 🚀🔥
