@@ -1,7 +1,6 @@
-```markdown
 # 📊 Finance Dashboard API
 
-A robust, secure, and highly scalable RESTful API built with Django REST Framework (DRF) for managing financial records. This system features Role-Based Access Control (RBAC), real-time dashboard aggregations, and enterprise-grade security practices.
+A robust, secure, and highly scalable RESTful API built with Django REST Framework (DRF) for managing financial records. This system features Role-Based Access Control (RBAC), real-time dashboard aggregations, automated API testing, and enterprise-grade security practices.
 
 ---
 
@@ -11,21 +10,20 @@ A robust, secure, and highly scalable RESTful API built with Django REST Framewo
   * `ADMIN`: Full CRUD access and User Management.
   * `ANALYST`: Read-only access to records and dashboard summaries.
   * `VIEWER`: Access restricted exclusively to the Dashboard Summary.
-* **Authentication & Security:** Secured using JWT (JSON Web Tokens) for modern, stateless authentication.
-* **Advanced Data Retrieval:** Built-in support for Pagination (10 items/page), Field Filtering (Date, Category, Type), Text Searching, and Column Ordering.
-* **Dashboard Aggregation:** Real-time calculation of Total Income, Total Expense, Net Balance, and Category-wise breakdown.
-* **Data Integrity:** Implemented "Soft Delete" functionality to prevent accidental data loss, along with strict Backend Model validations (e.g., blocking negative amounts and future dates).
+* **Authentication & Security:** Secured using JWT (JSON Web Tokens) for modern, stateless authentication. Includes extended user profiles (`first_name`, `last_name`).
+* **Advanced Data Retrieval:** Built-in support for Pagination, Field Filtering (Date, Category, Type), Text Searching, and Column Ordering.
+* **Dashboard Aggregation:** Real-time calculation of Total Income, Total Expense, Net Balance, and Category-wise breakdown via Django ORM aggregations.
+* **Data Integrity & Audit:** Implemented "Soft Delete" functionality to preserve financial history and prevent accidental data loss.
 * **API Security (Throttling):** Configured Rate Limiting to prevent API spam and DDoS attempts.
-* **Interactive Documentation:** Fully integrated Swagger UI for seamless API testing and exploration.
-* **Custom Admin Panel:** Enhanced Django Admin interface featuring a custom HTML Proxy Model to visualize analytics directly in the backend.
-* **Automated Data Seeding:** Python script included to instantly populate the database with realistic dummy data for testing.
+* **Interactive Documentation:** Fully integrated Swagger UI and exportable OpenAPI YAML specifications.
+* **Automated Postman Testing:** Includes a pre-configured Postman collection with automated token-handling scripts.
 
 ---
 
 ## 🛠️ Tech Stack
 
 * **Backend Framework:** Python 3, Django, Django REST Framework (DRF)
-* **Database:** MySQL (Configured for Production) / SQLite (for quick dev)
+* **Database:** MySQL (Production ready) / SQLite (Local development)
 * **Authentication:** `djangorestframework-simplejwt`
 * **API Documentation:** `drf-yasg` (Swagger UI)
 * **Data Parsing & Filtering:** `django-filter`
@@ -36,28 +34,30 @@ A robust, secure, and highly scalable RESTful API built with Django REST Framewo
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/yourusername/finance_backend.git](https://github.com/yourusername/finance_backend.git)
-cd finance_backend
+git clone [https://github.com/imsaqib04/Finance_dashboard.git](https://github.com/imsaqib04/Finance_dashboard.git)
+cd Finance_dashboard
 ```
 
 ### 2. Set Up Virtual Environment
 ```bash
 python -m venv env
-source env/bin/activate  # On Windows use: env\Scripts\activate
+# On Mac/Linux:
+source env/bin/activate  
+# On Windows:
+env\Scripts\activate
 ```
 
 ### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
-*(Note: If `requirements.txt` is missing, manually install `django`, `djangorestframework`, `djangorestframework-simplejwt`, `django-filter`, `pymysql`, `drf-yasg`)*
 
 ### 4. Database Setup (MySQL)
 Ensure MySQL is running on your machine. Create a database:
 ```sql
 CREATE DATABASE finance_db;
 ```
-Update your database credentials (USER, PASSWORD) in `finance_backend/settings.py`.
+*(Update your database credentials like USER and PASSWORD in `finance_backend/settings.py`)*.
 
 ### 5. Run Migrations & Create Superuser
 ```bash
@@ -66,37 +66,38 @@ python manage.py migrate
 python manage.py createsuperuser
 ```
 
-### 6. Seed Dummy Data (Optional but Recommended)
-Populate your database with realistic records to test the dashboard instantly:
-```bash
-python seed_data.py
-```
-
-### 7. Start the Server
+### 6. Start the Server
 ```bash
 python manage.py runserver
 ```
 
 ---
 
-## 📖 API Endpoints & Testing
+## 📖 API Testing & Documentation
 
-The easiest way to test the API is through the built-in Swagger interface.
+We have provided multiple ways to seamlessly explore and test this API:
 
-* **Swagger UI / API Docs:** `http://127.0.0.1:8000/api/docs/`
-* **Django Admin Panel:** `http://127.0.0.1:8000/admin/`
+### 1. Automated Postman Collection (Recommended ⚡)
+A ready-to-use Postman collection (`Finance_Dashboard_API_Collection.json`) is included in the root directory. 
+* **Pro-Tip:** The collection includes an automated **Post-response script**. When you hit the `Login` endpoint, it automatically extracts and saves the `access` and `refresh` tokens to your collection variables. You do not need to manually copy-paste tokens for subsequent requests!
 
-### Core Routes:
-* `POST /api/auth/register/` - Register a new user (Auto-assigned to Viewer role)
+### 2. Interactive Swagger UI
+* **Live UI Docs:** `http://127.0.0.1:8000/api/docs/`
+* **OpenAPI YAML:** You can download or view the raw `swagger.yaml` file included in this repository to import the API schema into your favorite client.
+*(Note: To use secured endpoints in Swagger UI, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button. Format: `Bearer <your_token>`)*
+
+### 3. Django Admin Panel
+* **Admin Dashboard:** `http://127.0.0.1:8000/admin/`
+* Includes customized views to manage Users, Roles, and Financial Records through a secure GUI.
+
+---
+
+## 🔗 Core API Endpoints
+
+* `POST /api/auth/register/` - Register a new user
 * `POST /api/auth/login/` - Obtain JWT Access & Refresh tokens
-* `GET /api/records/` - List all records (Supports `?search=`, `?ordering=`, `?category=`)
+* `POST /api/auth/refresh/` - Refresh expired access token
+* `GET /api/records/` - List all records (Supports `?search=`, `?ordering=`, `?category=`, etc.)
 * `POST /api/records/` - Create a new financial record
 * `GET /api/dashboard/summary/` - Get real-time financial analytics
-
-<<<<<<< HEAD
-*(Note: To use secured endpoints in Swagger, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button at the top of the Swagger page. Format: `Bearer <your_token>`)*
 ```
-
-=======
-*(Note: To use secured endpoints in Swagger, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button at the top of the Swagger page. Format: `Bearer <your_token>`)*
->>>>>>> cf00b39 (fix&feat: fix issues & add status code and error handling)
