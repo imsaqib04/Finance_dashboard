@@ -100,4 +100,27 @@ A ready-to-use Postman collection (`Finance_Dashboard_API_Collection.json`) is i
 * `GET /api/records/` - List all records (Supports `?search=`, `?ordering=`, `?category=`, etc.)
 * `POST /api/records/` - Create a new financial record
 * `GET /api/dashboard/summary/` - Get real-time financial analytics
-```
+
+---
+
+## 🗺️ Future Roadmap (Next Steps)
+
+While the core requirements and advanced features are fully implemented, here are some potential future enhancements for scaling the system:
+- [ ] **Caching Layer:** Integrate Redis to cache the Dashboard Summary API for faster load times on heavy datasets.
+- [ ] **Dockerization:** Containerize the application using Docker & Docker Compose for seamless "one-click" deployments.
+- [ ] **Background Tasks:** Use Celery for handling asynchronous tasks like sending welcome emails upon user registration.
+
+---
+
+## 👨‍💻 Author
+
+Built with ❤️ by **Mohd Saqib**
+
+* 💼 **LinkedIn:** [Mohd Saqib](https://linkedin.com/in/imsaqib04)
+* 📧 **Email:** [saqibansari2011@gmail.com](mailto:saqibansari2011@gmail.com)
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. Feel free to use, modify, and distribute this code for educational and professional purposes.
