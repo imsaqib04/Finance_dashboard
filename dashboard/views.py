@@ -10,9 +10,22 @@ class DashboardSummaryView(APIView):
     def get(self, request):
         try:
             summary_data = get_dashboard_summary()
-            return Response(summary_data)
+            
+            return Response(
+                {
+                    "success": True,
+                    "message": "Dashboard analytics fetched successfully!",
+                    "data": summary_data
+                },
+                status=status.HTTP_200_OK
+            )
+            
         except Exception as e:
             return Response(
-                {"error": "Failed to load dashboard data."},
+                {
+                    "success": False,
+                    "message": "Failed to load dashboard data.",
+                    "error": str(e)
+                },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )

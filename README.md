@@ -93,6 +93,10 @@ The easiest way to test the API is through the built-in Swagger interface.
 * `POST /api/records/` - Create a new financial record
 * `GET /api/dashboard/summary/` - Get real-time financial analytics
 
+<<<<<<< HEAD
 *(Note: To use secured endpoints in Swagger, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button at the top of the Swagger page. Format: `Bearer <your_token>`)*
 ```
 
+=======
+*(Note: To use secured endpoints in Swagger, login via the `/login/` endpoint, copy the `access` token, and click the **Authorize** button at the top of the Swagger page. Format: `Bearer <your_token>`)*
+>>>>>>> cf00b39 (fix&feat: fix issues & add status code and error handling)

@@ -9,4 +9,4 @@ class FinancialRecordFilter(django_filters.FilterSet):
 
     class Meta:
         model = FinancialRecord
-        fields = ['record_type', 'category', 'date_from', 'date_to']
+        fields = ['record_type', 'category', 'date_from', 'date_to', 'date']
